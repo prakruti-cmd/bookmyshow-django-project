@@ -1,0 +1,78 @@
+{% extends "users/basic.html" %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow mx-auto" style="max-width: 700px;">
+
+        <div class="card-header bg-primary text-white text-center">
+            <h3>🎬 BookMySeat - Movie Ticket</h3>
+        </div>
+
+        <div class="card-body">
+
+            <h4 class="text-center mb-4">
+                {{ booking.movie.name }}
+            </h4>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Booking ID</th>
+                    <td>{{ booking.id }}</td>
+                </tr>
+
+                <tr>
+                    <th>Movie</th>
+                    <td>{{ booking.movie.name }}</td>
+                </tr>
+
+                <tr>
+                    <th>Theater</th>
+                    <td>{{ booking.theater.name }}</td>
+                </tr>
+
+                <tr>
+                    <th>Screen</th>
+                    <td>{{ booking.theater.screen }}</td>
+                </tr>
+
+                <tr>
+                    <th>Show Timing</th>
+                    <td>{{ booking.theater.time }}</td>
+                </tr>
+
+                <tr>
+                    <th>Seat</th>
+                    <td>{{ booking.seat.seat_number }}</td>
+                </tr>
+
+                <tr>
+                    <th>Payment Reference</th>
+                    <td>{{ booking.payment_reference }}</td>
+                </tr>
+
+                <tr>
+                    <th>Booked By</th>
+                    <td>{{ booking.user.username }}</td>
+                </tr>
+            </table>
+
+            <div class="text-center mt-4">
+
+                <a href="{% url 'profile' %}"
+                class="btn btn-primary">
+                    Back to Profile
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer text-center text-muted">
+            Thank you for booking with BookMySeat 🎟️
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,6 @@
+.env
+db.sqlite3
+db - Copy.sqlite3
+celerybeat-schedule
+__pycache__/
+*.pyc

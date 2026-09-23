@@ -1,0 +1,348 @@
+{% extends "users/basic.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">Admin Dashboard</h1>
+
+    <!-- DATE FILTER -->
+    <form method="GET" class="mb-4">
+
+        <div class="row g-3">
+
+            <div class="col-md-4">
+                <label for="start_date" class="form-label">
+                    Start Date
+                </label>
+
+                <input
+                    type="date"
+                    name="start_date"
+                    id="start_date"
+                    class="form-control"
+                    value="{{ start_date|date:'Y-m-d' }}"
+                >
+            </div>
+
+            <div class="col-md-4">
+                <label for="end_date" class="form-label">
+                    End Date
+                </label>
+
+                <input
+                    type="date"
+                    name="end_date"
+                    id="end_date"
+                    class="form-control"
+                    value="{{ end_date|date:'Y-m-d' }}"
+                >
+            </div>
+
+            <div class="col-md-4 d-flex align-items-end">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Filter
+                </button>
+
+            </div>
+
+            <div class="col-md-4 d-flex align-items-end">
+
+                <a
+                    href="{% url 'export_dashboard_csv' %}?start_date={{ start_date|date:'Y-m-d' }}&end_date={{ end_date|date:'Y-m-d' }}"
+                    class="btn btn-success"
+                >
+                    Export CSV
+                </a>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+    <!-- REVENUE OVERVIEW -->
+
+    <h3 class="mb-3">Revenue Overview</h3>
+
+    <div class="row g-4">
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card shadow p-3 text-center">
+
+                <h5>Daily Revenue</h5>
+
+                <h3>₹{{ daily_revenue }}</h3>
+
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card shadow p-3 text-center">
+
+                <h5>Weekly Revenue</h5>
+
+                <h3>₹{{ weekly_revenue }}</h3>
+
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card shadow p-3 text-center">
+
+                <h5>Monthly Revenue</h5>
+
+                <h3>₹{{ monthly_revenue }}</h3>
+
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card shadow p-3 text-center">
+
+                <h5>Yearly Revenue</h5>
+
+                <h3>₹{{ yearly_revenue }}</h3>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- BOOKING TRENDS -->
+
+    <h3 class="mt-5 mb-3">Booking Trends</h3>
+
+    <div class="card shadow p-3">
+
+        {% for item in booking_trends %}
+
+            <p>
+                {{ item.booked_at__date }} :
+                <strong>
+                    {{ item.total }} bookings
+                </strong>
+            </p>
+
+        {% empty %}
+
+            <p>No bookings found.</p>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- THEATER OCCUPANCY -->
+
+    <h3 class="mt-5 mb-3">Theater Occupancy</h3>
+
+    <div class="card shadow p-3">
+
+        {% for theater in theater_occupancy %}
+
+            <p>
+
+                <strong>
+                    {{ theater.theater__name }}
+                </strong> :
+
+                {{ theater.booked_seats }}
+                /
+                {{ theater.total_seats }}
+                seats
+
+                ({{ theater.occupancy_percentage|floatformat:1 }}%)
+
+            </p>
+
+        {% empty %}
+
+            <p>No theater data found.</p>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- MOST BOOKED MOVIES -->
+
+    <h3 class="mt-5 mb-3">Most Booked Movies</h3>
+
+    <div class="card shadow p-3">
+
+        {% for movie in most_booked_movies %}
+
+            <p>
+
+                <strong>
+                    {{ movie.movie__name }}
+                </strong> :
+
+                {{ movie.total_bookings }} bookings
+
+            </p>
+
+        {% empty %}
+
+            <p>No movie booking data found.</p>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- TOP PERFORMING THEATERS -->
+
+    <h3 class="mt-5 mb-3">
+        Top-Performing Theaters
+    </h3>
+
+    <div class="card shadow p-3">
+
+        {% for theater in top_theaters %}
+
+            <p>
+
+                <strong>
+                    {{ theater.theater__name }}
+                </strong> :
+
+                {{ theater.total_bookings }} bookings
+
+            </p>
+
+        {% empty %}
+
+            <p>No theater booking data found.</p>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- PEAK BOOKING HOURS -->
+
+    <h3 class="mt-5 mb-3">
+        Peak Booking Hours
+    </h3>
+
+    <div class="card shadow p-3">
+
+        {% for hour in peak_booking_hours %}
+
+            <p>
+
+                <strong>
+                    {{ hour.booked_at__hour }}:00
+                </strong> :
+
+                {{ hour.total_bookings }} bookings
+
+            </p>
+
+        {% empty %}
+
+            <p>No booking hour data found.</p>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- CANCELLATION AND PAYMENT STATISTICS -->
+
+    <h3 class="mt-5 mb-3">
+        Cancellation & Payment Statistics
+    </h3>
+
+    <div class="card shadow p-3">
+
+        <p>
+            <strong>
+                Cancelled Bookings:
+            </strong>
+
+            {{ cancelled_bookings }}
+        </p>
+
+
+        <p>
+            <strong>
+                Cancelled Payments:
+            </strong>
+
+            {{ cancelled_payments }}
+        </p>
+
+
+        <p>
+            <strong>
+                Failed Payments:
+            </strong>
+
+            {{ failed_payments }}
+        </p>
+
+
+        <p>
+            <strong>
+                Refunded Payments:
+            </strong>
+
+            {{ refunded_payments }}
+        </p>
+
+
+        <p>
+            <strong>
+                Total Refund Amount:
+            </strong>
+
+            ₹{{ refund_amount }}
+        </p>
+
+    </div>
+
+
+    <!-- USER GROWTH -->
+
+    <h3 class="mt-5 mb-3">
+        User Growth
+    </h3>
+
+    <div class="card shadow p-3">
+
+        {% for user in user_growth %}
+
+            <p>
+
+                <strong>
+                    {{ user.date_joined__date }}
+                </strong> :
+
+                {{ user.total_users }}
+                new users
+
+            </p>
+
+        {% empty %}
+
+            <p>No new users found.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
