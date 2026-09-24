@@ -94,7 +94,7 @@ The project was developed by adding the required internship features to the exis
 ```text
 bookmyshow-django-project/
 ├── manage.py
-├── name/
+├── bookmyseat/
 ├── movies/
 ├── users/
 ├── templates/
@@ -104,6 +104,7 @@ bookmyshow-django-project/
 ├── release_expired_seats.bat
 └── .gitignore
 
+```
 ## Security
 
 Sensitive configuration such as Django secret keys, Razorpay credentials and email credentials is stored using environment variables and is not included in the public repository.
@@ -125,10 +126,13 @@ The implemented features were tested during development, including:
 
 ## Internship Details
 
-**Program:** Elevance Skills Internship  
-**Domain:** Web Development / Django  
-**Project:** BookMyShow Django Project  
-**Developer:** Prakruti Hiremath
+Program: Elevance Skills Internship
+
+Domain: Web Development / Django
+
+Project: BookMyShow Django Project
+
+Developer: Prakruti Hiremath
 
 ## Future Improvements
 
