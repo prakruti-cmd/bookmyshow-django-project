@@ -11,9 +11,11 @@
                     <h5>More Posters</h5>
                     <div class="row">
                         {% for poster in posters %}
+                            {% if poster.image %}
                             <div class="col-4">
                                 <img src="{{ poster.image }}" class="img-fluid" alt="{{ poster.caption }}">
                             </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
