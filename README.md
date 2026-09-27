@@ -2,67 +2,56 @@
 
 ## Project Overview
 
-This is a Django-based online movie booking application developed as part of the Elevance Skills internship program.
-
-The project was developed by adding the required internship features to the existing Django training project.
+This is a Django-based online movie booking application developed as part of the Elevance Skills internship program. The project was built by adding the required internship features to the existing Django training project.
 
 ## Tasks Completed
 
-### Task 1 – Movie Search, Filtering and Recommendations
-
-- Movie search
-- Search and filtering by genre, language, city, theater, release date, rating and show time
-- Sorting and pagination
+### Task 1 – Movie Discovery with Search, Filters and Recommendations
+- Movie search by title
+- Filtering by genre, language, city, theater, release date, rating and show time
+- Sorting by popularity, newest releases, rating and price
+- Pagination and dynamic match count
 - Trending and recently viewed movies
-- Recommended movies
+- "Recommended for You" section
 
-### Task 2 – Digital Ticket and Ticket History
-
+### Task 2 – Automated Ticket Generation and Email Confirmation
 - PDF ticket generation
-- QR code generation
-- Ticket download
-- Ticket history
-- Email delivery of tickets
-- Retry support
+- QR code for verification
+- Ticket emailed via Celery background processing
+- Automatic retry on failed delivery
+- Ticket download from booking history
 
-### Task 3 – Movie and Review Management
-
-- Movie management
-- Theater and show schedule management
-- Movie genres, languages and cast
+### Task 3 – Movie Management with Trailer, Reviews and Ratings
+- Admin management of movies, genres, languages, cast, theaters and schedules
+- Secure YouTube trailer embedding
 - Multiple movie posters
-- YouTube trailer
 - Age certification and duration
-- Reviews and ratings
-- Automatic average rating
+- Reviews allowed only after booking and watching
+- Automatic average rating calculation
 - Review editing and reporting
 - Verified viewer badges
-- Similar, trending and recently viewed movies
+- Similar, trending and recently released recommendations
 
-### Task 4 – Payment and Booking Management
-
+### Task 4 – Complete Payment Workflow with Booking Management
 - Razorpay test payment integration
-- Pending and confirmed bookings
 - Server-side payment verification
-- Successful, failed and cancelled payment handling
-- Seat release after failed or cancelled payments
-- Payment transaction records
-- Payment and booking history
-- Retry payment
+- Success, failure, cancellation and retry handling
+- Webhook verification
+- Automatic seat release on failed payments
+- Payment transaction records with status and transaction ID
+- Complete payment and booking history in profile
 - Duplicate payment protection
-- Razorpay webhook handling
 
-### Task 5 – Smart Seat Reservation
-
+### Task 5 – Smart Seat Reservation with Live Availability
 - Live seat availability
 - Multiple seat selection
-- Temporary seat reservation
-- Automatic reservation expiry
-- Duplicate active booking protection
-- Transaction-based booking logic
+- 2-minute temporary reservation with automatic expiry
+- Duplicate active booking protection under concurrency
+- Seat modification before payment
+- Clear status indicators (available, reserved, sold)
+- Transaction-based booking logic with select_for_update
 
 ### Task 6 – Admin Dashboard
-
 - Daily, weekly, monthly and yearly revenue
 - Booking trends
 - Theater occupancy percentage
@@ -71,9 +60,9 @@ The project was developed by adding the required internship features to the exis
 - Peak booking hours
 - Cancellation and refund statistics
 - User growth
-- Custom date filtering
+- Custom date range filtering
 - CSV export
-- Optimized Django ORM queries
+- Optimized Django ORM aggregations
 - Database indexes for performance
 
 ## Technology Stack
@@ -83,11 +72,13 @@ The project was developed by adding the required internship features to the exis
 - HTML
 - CSS
 - JavaScript
-- SQLite
-- Razorpay Test API
-- Celery
-- Git
-- GitHub
+- PostgreSQL (Neon) — production database
+- SQLite — local development
+- Razorpay (Test Mode)
+- Celery + django_celery_beat
+- ReportLab, qrcode, Pillow
+- Git and GitHub
+- Vercel (hosting)
 
 ## Project Structure
 
@@ -99,6 +90,7 @@ bookmyshow-django-project/
 ├── users/
 ├── templates/
 ├── media/
+├── screenshots/
 ├── requirements.txt
 ├── vercel.json
 ├── release_expired_seats.bat
@@ -106,38 +98,72 @@ bookmyshow-django-project/
 
 ```
 ## Security
-
 Sensitive configuration such as Django secret keys, Razorpay credentials and email credentials is stored using environment variables and is not included in the public repository.
 
 ## Testing
+The implemented features were tested during development:
 
-The implemented features were tested during development, including:
+Movie search and filtering
 
-- Movie search and filtering
-- Movie recommendations
-- Ticket generation and email delivery
-- Payment workflow
-- Failed and cancelled payments
-- Seat reservation and expiry
-- Duplicate booking protection
-- Admin dashboard analytics
-- CSV export
-- Performance testing with a large booking dataset
+Movie recommendations
+
+Seat reservation and expiry
+
+Duplicate booking protection
+
+Payment workflow (success, failure, cancellation, retry)
+
+Ticket generation and email delivery
+
+Reviews and verified badges
+
+Admin dashboard analytics
+
+CSV export
+
+Performance testing with a large booking dataset
 
 ## Internship Details
-
 Program: Elevance Skills Internship
 
-Domain: Web Development / Django
+Domain: Full Stack Web Development (Python Django)
 
 Project: BookMyShow Django Project
 
-Developer: Prakruti Hiremath
+Developer: Prakruti 
 
 ## Future Improvements
+Production-grade database and Celery infrastructure
 
-- Production database and scalable background task infrastructure
-- Additional payment providers
-- More advanced recommendation features
-- Enhanced analytics and visualizations
-- Production monitoring and performance improvements
+Additional payment providers
+
+Advanced recommendation engine
+
+Enhanced analytics and visualizations
+
+Production monitoring
+
+---
+
+## Project Screenshots
+
+### Task 1 — Movie Discovery with Search, Filters and Recommendations
+![Task 1](screenshots/1_task1.png)
+
+### Task 2 — Automated Ticket Generation and Email Confirmation
+![Task 2](screenshots/2_task2.png)
+
+### Task 3 — Movie Management with Trailer, Reviews and Ratings
+![Task 3](screenshots/3_task3.png)
+
+### Task 4 — Complete Payment Workflow with Booking Management
+![Task 4](screenshots/4_task4.png)
+
+### Task 5 — Smart Seat Reservation with Live Availability
+![Task 5](screenshots/5_task1.png)
+
+### Task 6 — Admin Dashboard (Overview)
+![Task 6a](screenshots/6_task.png)
+
+### Task 6 — Admin Dashboard (Details)
+![Task 6b](screenshots/6_task6.png)
