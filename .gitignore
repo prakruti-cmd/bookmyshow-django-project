@@ -4,3 +4,6 @@ db - Copy.sqlite3
 celerybeat-schedule
 __pycache__/
 *.pyc
+fixtures.json
+movies_fixture.json
+test_dump.json
