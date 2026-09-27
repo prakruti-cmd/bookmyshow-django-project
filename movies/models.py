@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Movie(models.Model):
     name= models.CharField(max_length=255)
-    image= models.ImageField(upload_to="movies/")
+    image = models.URLField(max_length=500, blank=True, null=True)
     rating = models.DecimalField(max_digits=3,decimal_places=1)
     cast= models.TextField()
     description= models.TextField(blank=True,null=True) # optional
@@ -140,7 +140,7 @@ class Booking(models.Model):
         
 class MoviePoster(models.Model):
         movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='posters')
-        image = models.ImageField(upload_to='movie_posters/')
+        image = models.URLField(max_length=500, blank=True, null=True)
         caption = models.CharField(max_length=100, blank=True, null=True)
         order = models.PositiveIntegerField(default=0)
         uploaded_at = models.DateTimeField(auto_now_add=True)
