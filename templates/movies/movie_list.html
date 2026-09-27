@@ -93,7 +93,9 @@
             <div class="col-md-2 col-4 mb-3">
                 <div class="card">
                     <a href="{% url 'movie_detail' movie.id %}">
+                        {% if movie.image %}
                         <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.name }}" style="height: 150px; object-fit: cover;">
+                        {% endif %}
                     </a>
                     <div class="card-body p-2">
                         <h6 class="card-title text-truncate">{{ movie.name }}</h6>
@@ -112,7 +114,9 @@
             <div class="col-md-2 col-4 mb-3">
                 <div class="card">
                     <a href="{% url 'movie_detail' movie.id %}">
+                        {% if movie.image %}
                         <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.name }}" style="height: 150px; object-fit: cover;">
+                    {% endif %}
                     </a>
                     <div class="card-body p-2">
                         <h6 class="card-title text-truncate">{{ movie.name }}</h6>
